@@ -1,0 +1,54 @@
+# BenefitScan — Python Dependencies
+# Install with: pip install -r requirements.txt
+#
+# Version strategy: we use >= minimums so pip can resolve compatible versions.
+# If you hit dependency conflicts, try: pip install -r requirements.txt --upgrade
+
+# --- Web Framework ---
+# FastAPI: modern Python web framework with automatic API docs and type validation
+fastapi>=0.111.0
+
+# ASGI server that runs FastAPI. [standard] adds websockets + fast HTTP parsing
+uvicorn[standard]>=0.30.0
+
+# Required for FastAPI to parse multipart/form-data (file uploads)
+python-multipart>=0.0.9
+
+# Serve static files (our frontend) from FastAPI
+aiofiles>=23.2.0
+
+# --- PDF Processing ---
+# Primary: purpose-built for table extraction — preserves row/column relationships
+pdfplumber>=0.11.0
+
+# Fallback: handles edge cases pdfplumber can't (image-heavy, non-standard encoding)
+pymupdf>=1.24.0
+
+# --- AI / LLM ---
+# Official Anthropic Python SDK for Claude API calls
+anthropic>=0.40.0
+
+# Google Gemini SDK — free-tier alternative to Anthropic (no credit card required)
+# Note: google-generativeai is deprecated, use google-genai instead
+google-genai>=1.0.0
+
+# Retry logic with exponential backoff for API failures
+tenacity>=8.3.0
+
+# --- Database ---
+# SQLAlchemy: Python ORM — write database-agnostic code today, migrate to Postgres later
+sqlalchemy>=2.0.0
+
+# --- Configuration ---
+# Load .env files into environment variables
+python-dotenv>=1.0.0
+
+# Pydantic for data validation and API schemas
+pydantic>=2.7.0
+
+# Pydantic extension for settings management (reads from .env)
+pydantic-settings>=2.3.0
+
+# --- Excel Export ---
+# openpyxl: read/write .xlsx files with full formatting support
+openpyxl>=3.1.0

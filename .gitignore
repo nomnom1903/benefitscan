@@ -1,0 +1,35 @@
+# Environment variables — NEVER commit this, it has your API key
+.env
+
+# Python virtual environment
+venv/
+.venv/
+env/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# Database file — contains extracted broker data, keep out of git
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploaded PDFs — broker client documents, don't commit
+storage/uploads/*.pdf
+storage/uploads/*.PDF
+
+# Generated Excel files
+storage/outputs/*.xlsx
+
+# macOS junk
+.DS_Store
+
+# VS Code settings (keep if your team uses VS Code, otherwise ignore)
+.vscode/
+
+# Test coverage reports
+htmlcov/
+.coverage

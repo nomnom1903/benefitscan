@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BenefitScan — SBC Extraction & Plan Comparison</title>
+
+  <!-- DM Sans: professional, readable, appropriate for financial/insurance tools -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+
+  <!-- ─── Top Navigation Bar ──────────────────────────────────────────────── -->
+  <header class="navbar">
+    <div class="navbar-brand">
+      <div class="brand-icon">B</div>
+      <div>
+        <div class="brand-name">BenefitScan</div>
+        <div class="brand-tagline">AI-Powered SBC Extraction</div>
+      </div>
+    </div>
+    <div class="navbar-actions">
+      <span class="status-indicator" id="api-status">● Connecting…</span>
+    </div>
+  </header>
+
+  <!-- ─── Main Layout ──────────────────────────────────────────────────────── -->
+  <main class="main-layout">
+
+    <!-- ─── Upload Panel ──────────────────────────────────────────────────── -->
+    <section class="upload-section" id="upload-section">
+      <div class="section-header">
+        <h2 class="section-title">Upload SBC Documents</h2>
+        <p class="section-subtitle">
+          Upload one or more Summary of Benefits and Coverage PDFs.
+          AI will extract all plan fields automatically.
+        </p>
+      </div>
+
+      <!-- Drag and drop zone -->
+      <div class="dropzone" id="dropzone" role="button" tabindex="0"
+           aria-label="Drop PDF files here or click to browse">
+        <div class="dropzone-icon">📄</div>
+        <div class="dropzone-primary">Drop SBC PDFs here</div>
+        <div class="dropzone-secondary">or <span class="link-text">click to browse</span></div>
+        <div class="dropzone-hint">Supports single or multiple PDFs</div>
+        <input type="file" id="file-input" accept=".pdf" multiple hidden />
+      </div>
+
+      <!-- File queue (shown after files are selected) -->
+      <div class="file-queue" id="file-queue" hidden>
+        <div class="file-queue-header">
+          <span id="file-queue-count">0 files selected</span>
+          <button class="btn btn-ghost btn-sm" id="clear-queue-btn">Clear</button>
+        </div>
+        <ul class="file-list" id="file-list"></ul>
+        <div class="file-queue-footer">
+          <button class="btn btn-primary" id="extract-btn">
+            <span class="btn-icon">⚡</span>
+            Extract All Plans
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Review Table Section ─────────────────────────────────────────── -->
+    <section class="review-section" id="review-section">
+      <div class="review-header">
+        <div>
+          <h2 class="section-title">Plan Review</h2>
+          <p class="section-subtitle" id="review-subtitle">
+            Review and correct AI-extracted values before exporting.
+          </p>
+        </div>
+        <div class="review-actions">
+          <button class="btn btn-ghost btn-sm" id="refresh-btn" title="Reload plans from database">
+            ↻ Refresh
+          </button>
+          <button class="btn btn-ghost btn-sm danger" id="clear-all-btn" hidden>
+            🗑 Clear All
+          </button>
+          <button class="btn btn-primary" id="export-btn" hidden>
+            ⬇ Export to Excel
+          </button>
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div class="legend" id="legend" hidden>
+        <span class="legend-item"><span class="legend-dot dot-ok"></span> Extracted OK</span>
+        <span class="legend-item"><span class="legend-dot dot-review"></span> Review Flagged</span>
+        <span class="legend-item"><span class="legend-dot dot-missing"></span> Missing</span>
+        <span class="legend-item"><span class="legend-dot dot-noncompliant"></span> Non-Compliant</span>
+        <span class="legend-hint">Click any cell to edit</span>
+      </div>
+
+      <!-- Loading state -->
+      <div class="empty-state" id="empty-state">
+        <div class="empty-icon">📋</div>
+        <div class="empty-title">No plans yet</div>
+        <div class="empty-body">Upload SBC PDFs above to get started.</div>
+      </div>
+
+      <!-- The comparison table (horizontal scroll container) -->
+      <div class="table-wrapper" id="table-wrapper" hidden>
+        <table class="comparison-table" id="comparison-table">
+          <thead id="table-head"></thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── Toast Notifications ──────────────────────────────────────────────── -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- ─── Tooltip (shared, positioned by JS) ───────────────────────────────── -->
+  <div class="tooltip" id="tooltip" hidden></div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
