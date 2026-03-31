@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="/static/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
 
@@ -122,6 +122,8 @@
   <!-- ─── Tooltip (shared, positioned by JS) ───────────────────────────────── -->
   <div class="tooltip" id="tooltip" hidden></div>
 
-  <script src="/static/app.js"></script>
+  <!-- Set backend URL for GitHub Pages deployment. Replace with your deployed backend. -->
+  <script>window.BENEFITSCAN_API_URL = "https://YOUR-BACKEND.onrender.com";</script>
+  <script src="./app.js"></script>
 </body>
 </html>

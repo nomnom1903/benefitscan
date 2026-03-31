@@ -13,8 +13,9 @@
  */
 
 // ─── API base URL ─────────────────────────────────────────────────────────────
-// Since the frontend is served from the same FastAPI server, we use the same origin.
-const API = window.location.origin;
+// When deployed: set BENEFITSCAN_API_URL to your backend URL (e.g. Render).
+// Locally: falls back to same origin (FastAPI serves both).
+const API = window.BENEFITSCAN_API_URL || window.location.origin;
 
 // ─── Column definitions ───────────────────────────────────────────────────────
 // Ordered list of field keys and their display labels.
